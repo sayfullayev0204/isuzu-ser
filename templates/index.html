@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -45,17 +46,61 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>                                                
                                         <ul id="navigation">                                                                                                                                     
-                                            <li><a style="color: red" href="{% url 'home' %}">Asosiy</a></li>
-                                            <li><a  href="{% url 'about' %}">Biz haqimizda</a></li>
-                                            <li><a  href="{% url 'custom' %}">Narxlar</a>
-                                            <li><a  href="#">Servis</a>
-                                            <li><a  href="{% url 'part' %}">Ehtiyot qisimlari</a>
-                                            <li><a  href="{% url 'dmax' %}">D-max</a>
-                                            <li><a  href="#">UZB <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt=""></a>
+                                            <li><a style="color: red" href="{% url 'home' %}">{% trans "Asosiy" %}</a></li>
+                                            <li><a  href="{% url 'about' %}">{% trans "Biz haqimizda" %}</a></li>
+                                            <li><a  href="{% url 'custom' %}">{% trans "Narxlar" %}</a>
+                                            <li><a  href="#">{% trans "Servis" %}</a>
+                                            <li><a  href="{% url 'part' %}">{% trans "Ehtiyot qisimlari" %}</a>
+                                            <li><a  href="{% url 'dmax' %}">{% trans "D-max" %}</a>
+                                            <li><a  href="#">
+                                                {% if request.LANGUAGE_CODE == "uz" %}
+                                                    O'z <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt="">
+                                                    {% elif request.LANGUAGE_CODE == "ru" %}
+                                                    Ру <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt="">
+                                                    {% elif request.LANGUAGE_CODE == "en" %}
+                                                    En <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt="">
+                                                {% endif %}                                              
+                                                </a>
                                                 <ul class="submenu" style="background-color: rgba(245, 245, 220, 0.57);">
-                                                    <li><a  href="product_list.html">ENG <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt=""></a></li>
-                                                    <li><a  href="single-product.html">RUS <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt=""></a></li>
-                                                </ul>
+                                                        <!-- Ruscha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="ru">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "Ruscha" %}</span>
+                                                              <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                            
+                                                        <!-- Inglizcha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="en">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "Inglizcha" %}</span>
+                                                              <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                            
+                                                        <!-- O'zbekcha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="uz">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "O'zbekcha" %}</span>
+                                                              <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                                      </ul>
                                             </li>
                                                 
                                         </ul>
@@ -135,7 +180,7 @@
                     <!-- Section Tittle -->
                     <div class="col-xl-4 col-lg-5 col-md-5">
                         <div class="section-tittle mb-30">
-                            <h2>Bizning mahsulotlar</h2>
+                            <h2>{% trans "Bizning mahsulotlar" %}</h2>
                         </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7">
@@ -143,10 +188,10 @@
                             <!--Nav Button  -->
                             <nav>                                                                                                
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Barchasi</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Avtobuslar</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Yuk mashinalari</a>
-                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Maxsus texnikalar</a>
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{% trans "Barchasi" %}</a>
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans "Avtobuslar" %}</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">{% trans "Yuk mashinalari" %}</a>
+                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">{% trans "Maxsus texnikalar" %}</a>
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
@@ -167,11 +212,20 @@
                                         </div>
                                     </div>
                                     <div class="product-caption">
-                                        <h2><a href="#">{{i.turi}}</a></h4>
+                                        <h2>
+                                            <a href="#">
+                                                {% if i.turi.has_translation %}
+                                                    {{ i.turi }}
+                                                {% else %}
+                                                    {{ i.turi_id }}  <!-- yoki muqobil matn -->
+                                                {% endif %}
+                                            </a>
+                                        </h2>
+                                        
                                             <h5>{{i.nomi}}</p>
                                         <div class="price">
                                             <ul>
-                                                <li style="color: white;">{{i.narxi}}</li>
+                                                <li style="color: white;">{{i.narxi}}</li> so'm
                                             </ul>
                                         </div>
                                     </div>
@@ -193,7 +247,7 @@
                                         <h4><a href="#">{{i.nomi}}</a></h4>
                                         <div class="price">
                                             <ul>
-                                                <li style="color: white;">{{i.narxi}}</li>
+                                                <li style="color: white;">{{i.narxi}}</li> so'm
                                             </ul>
                                         </div>
                                     </div>
@@ -216,7 +270,7 @@
                                         <h4><a href="#">{{i.nomi}}</a></h4>
                                         <div class="price">
                                             <ul>
-                                                <li style="color: white;">{{i.narxi}}</li>
+                                                <li style="color: white;">{{i.narxi}}</li> so'm
                                             </ul>
                                         </div>
                                     </div>
@@ -238,7 +292,7 @@
                                         <h4><a href="#">{{i.nomi}}</a></h4>
                                         <div class="price">
                                             <ul>
-                                                <li style="color: white;">{{i.narxi}}</li>
+                                                <li style="color: white;">{{i.narxi}}</li> so'm
                                             </ul>
                                         </div>
                                     </div>
@@ -257,7 +311,7 @@
         <div class="container">
             <div class="row product-btn d-flex justify-content-start align-items-start">
                     <div class="section-tittle mb-30">
-                        <h2>Biz bilan bog'lanish</h2>
+                        <h2>{% trans "Biz bilan bog'lanish" %}</h2>
                     </div>
                 </div>
             </div>
@@ -271,34 +325,34 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h2 class="contact-title">Xabar qoldirish</h2>
+                    <h2 class="contact-title">{% trans "Xabar qoldirish" %}</h2>
                 </div>
                 <div class="col-lg-8">
                     <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"></textarea>
+                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="{% trans 'Xabar matni' %}"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
+                                    <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="{% trans 'Ismingiz' %}">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                    <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="{% trans 'Emailingiz' %}">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
+                                    <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="{% trans 'Sarlavha' %}">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm boxed-btn">Yuborish</button>
+                            <button type="submit" class="button button-contactForm boxed-btn">{% trans "Yuborish" %}</button>
                         </div>
                     </form>
                 </div>
@@ -306,21 +360,21 @@
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-home"></i></span>
                         <div class="media-body">
-                            <h3>Buxoro shahri G'ijduvon ko'chasi 69 uy</h3>
-                            <p>Muljal: Buxoro Obl Gai</p>
+                            <p>{% trans "Buxoro shahri G'ijduvon ko'chasi 69 uy" %}</h3>
+                            <p>{% trans "Muljal: Buxoro Obl Gai" %}</p>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
-                            <h3>(91)409-88-44 </h3>
+                            <p>(91)409-88-44 </h3>
                             <p>(98)700-99-19</p>
                         </div>
                     </div>
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-email"></i></span>
                         <div class="media-body">
-                            <h3>manbukhara@mail.ru</h3>
+                            <p>manbukhara@mail.ru</h3>
                             <p>Samavtobukhara@mail.ru</p>
                         </div>
                     </div>
@@ -341,7 +395,7 @@
                <div class="row">
                 <div class="col-xl-7 col-lg-7 col-md-7">
                     <div class="footer-copy-right">
-                        <p> &copy; Truck Service  Center | Barcha huquqlar himoyalangan. </div>
+                        <p> &copy; Truck Service  Center | {% trans "Barcha huquqlar himoyalangan." %} </div>
   
                 </div>
                  <div class="col-xl-5 col-lg-5 col-md-5">

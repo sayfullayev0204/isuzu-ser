@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!doctype html>
 <html lang="zxx">
@@ -27,7 +28,7 @@
 <body style="background-color: #44546F;">
     
 
-    <header>
+    <header style="background-color: beige;">
         <!-- Header Start -->
        <div class="header-area">
             <div class="main-header ">
@@ -45,17 +46,61 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>                                                
                                         <ul id="navigation">                                                                                                                                     
-                                            <li><a  href="{% url 'home' %}">Asosiy</a></li>
-                                            <li><a style="color: red" href="{% url 'about' %}">Biz haqimizda</a></li>
-                                            <li><a  href="{% url 'custom' %}">Narxlar</a>
-                                            <li><a  href="#">Servis</a>
-                                            <li><a  href="{% url 'part' %}">Ehtiyot qisimlari</a>
-                                            <li><a  href="{% url 'dmax' %}">D-max</a>
-                                            <li><a  href="#">UZB <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt=""></a>
-                                                <ul class="submenu" style="background-color: #44546F;">
-                                                    <li><a  href="product_list.html">ENG <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt=""></a></li>
-                                                    <li><a  href="single-product.html">RUS <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt=""></a></li>
-                                                </ul>
+                                            <li><a  href="{% url 'home' %}">{% trans "Asosiy" %}</a></li>
+                                            <li><a style="color: red" href="{% url 'about' %}">{% trans "Biz haqimizda" %}</a></li>
+                                            <li><a  href="{% url 'custom' %}">{% trans "Narxlar" %}</a>
+                                            <li><a  href="#">{% trans "Servis" %}</a>
+                                            <li><a  href="{% url 'part' %}">{% trans "Ehtiyot qisimlari" %}</a>
+                                            <li><a  href="{% url 'dmax' %}">{% trans "D-max" %}</a>
+                                            <li><a  href="#">
+                                                {% if request.LANGUAGE_CODE == "uz" %}
+                                                    O'z <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt="">
+                                                    {% elif request.LANGUAGE_CODE == "ru" %}
+                                                    Ру <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt="">
+                                                    {% elif request.LANGUAGE_CODE == "en" %}
+                                                    En <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt="">
+                                                {% endif %}                                              
+                                                </a>
+                                                <ul class="submenu" style="background-color: rgba(245, 245, 220, 0.57);">
+                                                        <!-- Ruscha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="ru">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "Ruscha" %}</span>
+                                                              <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                            
+                                                        <!-- Inglizcha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="en">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "Inglizcha" %}</span>
+                                                              <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                            
+                                                        <!-- O'zbekcha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="uz">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "O'zbekcha" %}</span>
+                                                              <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                                      </ul>
                                             </li>
                                                 
                                         </ul>
@@ -85,6 +130,9 @@
        </div>
         <!-- Header End -->
     </header>
+
+
+
   <!-- slider Area Start-->
   <div class="slider-area ">
     <!-- Mobile Menu -->
@@ -93,7 +141,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2 style="color: red;">Biz haqimizda</h2>
+                        <h2 style="color: red;">{% trans "Biz haqimizda"%}</h2>
                     </div>
                 </div>
             </div>
@@ -113,20 +161,12 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="feature_part_content">
-                        <p>Sizni, kompaniyamizning potentsial mijozi – “SamAvto” va “Uz Truck and Bus Motors” rasmiy dileri sifatida tabriklaymiz. Biz sizga sanoatning ishonchi va hurmatini qozongan ishlab chiqaruvchilarning eng yuqori sifatli mahsulotlarini olib kelishdan faxrlanamiz. Kompaniyamiz xizmatlarning to'liq spektrini, jumladan, transport vositalari va dvigatellarni sotish va texnik xizmat ko'rsatish, jumladan, maslahat, ta'mirlash va texnik xizmat ko'rsatishni taklif qiladi. Biz doimo xizmatlarimizni yaxshilash ustida ishlaymiz, shunda bizning tajribamiz faqat eng yaxshisidir. Avtomobilingiz yoki dvigatelingizni sotib olishingiz va ishlatishingizga qanday yordam berishimiz haqida ko'proq bilish uchun bugun biz bilan bog'laning.</p>
+                        <p>{% trans "Sizni, kompaniyamizning potentsial mijozi – “SamAvto” va “Uz Truck and Bus Motors” rasmiy dileri sifatida tabriklaymiz. Biz sizga sanoatning ishonchi va hurmatini qozongan ishlab chiqaruvchilarning eng yuqori sifatli mahsulotlarini olib kelishdan faxrlanamiz. Kompaniyamiz xizmatlarning to'liq spektrini, jumladan, transport vositalari va dvigatellarni sotish va texnik xizmat ko'rsatish, jumladan, maslahat, ta'mirlash va texnik xizmat ko'rsatishni taklif qiladi. Biz doimo xizmatlarimizni yaxshilash ustida ishlaymiz, shunda bizning tajribamiz faqat eng yaxshisidir. Avtomobilingiz yoki dvigatelingizni sotib olishingiz va ishlatishingizga qanday yordam berishimiz haqida ko'proq bilish uchun bugun biz bilan bog'laning." %}</p>
                     </div>
                 </div>
                 <div class="col-lg-5" style="margin-top: 30px;">
                     <div class="feature_part_content">
-                        <p>Biz keng ko'lamli xizmatlar taqdim etamiz:
-                            -Diagnostika
-                            -Dvigatel tiklash
-                            -Vites qutisini ta'mirlash
-                            -Havoni tizimini tiklash
-                            -Shassi tiklash
-                            -Elektr ta'mirlash
-                            -Gidravlik tizimini tiklash
-                            Bizning mutaxassislarimiz yuqori sifatli tiklash va avtomobilingizni qo'llab-quvvatlashni ta'minlashga imkon beradigan malakali va tajribali mutaxassislar hisoblanadi.</p>
+                        <p>{% trans "Biz keng ko'lamli xizmatlar taqdim etamiz:-Diagnostika-Dvigatel tiklash-Vites qutisini ta'mirlash-Havoni tizimini tiklash-Shassi tiklash-Elektr ta'mirlash-Gidravlik tizimini tiklash Bizning mutaxassislarimiz yuqori sifatli tiklash va avtomobilingizni qo'llab-quvvatlashni ta'minlashga imkon beradigan malakali va tajribali mutaxassislar hisoblanadi." %}</p>
                     </div>
                 </div>
                 <div class="col-lg-5">
@@ -147,7 +187,7 @@
                 <div class="row">
                  <div class="col-xl-7 col-lg-7 col-md-7">
                      <div class="footer-copy-right">
-                         <p> &copy; Truck Service  Center | Barcha huquqlar himoyalangan. </div>
+                         <p> &copy; Truck Service  Center | {% trans "Barcha huquqlar himoyalangan."%} </div>
    
                  </div>
                   <div class="col-xl-5 col-lg-5 col-md-5">

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -26,7 +27,7 @@
 
 <body>
 
-    <header>
+    <header style="background-color: beige;">
         <!-- Header Start -->
        <div class="header-area">
             <div class="main-header ">
@@ -44,17 +45,61 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>                                                
                                         <ul id="navigation">                                                                                                                                     
-                                            <li><a  href="{% url 'home' %}">Asosiy</a></li>
-                                            <li><a  href="{% url 'about' %}">Biz haqimizda</a></li>
-                                            <li><a  href="{% url 'custom' %}">Narxlar</a>
-                                            <li><a  href="#">Servis</a>
-                                            <li><a  href="{% url 'part' %}">Ehtiyot qisimlari</a>
-                                            <li><a style="color: red" href="{% url 'dmax' %}">D-max</a>
-                                            <li><a  href="#">UZB <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt=""></a>
-                                                <ul class="submenu" style="background-color: #44546F;">
-                                                    <li><a  href="product_list.html">ENG <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt=""></a></li>
-                                                    <li><a  href="single-product.html">RUS <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt=""></a></li>
-                                                </ul>
+                                            <li><a  href="{% url 'home' %}">{% trans "Asosiy" %}</a></li>
+                                            <li><a  href="{% url 'about' %}">{% trans "Biz haqimizda" %}</a></li>
+                                            <li><a  href="{% url 'custom' %}">{% trans "Narxlar" %}</a>
+                                            <li><a  href="#">{% trans "Servis" %}</a>
+                                            <li><a  href="{% url 'part' %}">{% trans "Ehtiyot qisimlari" %}</a>
+                                            <li><a style="color: red" href="{% url 'dmax' %}">{% trans "D-max" %}</a>
+                                            <li><a  href="#">
+                                                {% if request.LANGUAGE_CODE == "uz" %}
+                                                    O'z <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt="">
+                                                    {% elif request.LANGUAGE_CODE == "ru" %}
+                                                    Ру <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt="">
+                                                    {% elif request.LANGUAGE_CODE == "en" %}
+                                                    En <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt="">
+                                                {% endif %}                                              
+                                                </a>
+                                                <ul class="submenu" style="background-color: rgba(245, 245, 220, 0.57);">
+                                                        <!-- Ruscha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="ru">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "Ruscha" %}</span>
+                                                              <img src="{% static 'img/ru.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                            
+                                                        <!-- Inglizcha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="en">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "Inglizcha" %}</span>
+                                                              <img src="{% static 'img/en.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                            
+                                                        <!-- O'zbekcha til uchun -->
+                                                        <li>
+                                                          <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="language" value="uz">
+                                                            <button type="submit"
+                                                              style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
+                                                              <span style="margin-right: 5px; color: black;">{% trans "O'zbekcha" %}</span>
+                                                              <img src="{% static 'img/uz.png' %}" style="max-width: 20px;" alt="">
+                                                            </button>
+                                                          </form>
+                                                        </li>
+                                                      </ul>
                                             </li>
                                                 
                                         </ul>
@@ -85,15 +130,24 @@
         <!-- Header End -->
     </header>
 
+
+
+<style>
+    .slider-area{
+    background-image: url("{% static 'img/dmaxh.jpg' %}"); 
+    background-size: cover; /* Rasmni moslashtirish uchun */
+    background-position: center; /* Markazda joylashishi uchun */
+    background-repeat: no-repeat; /* Takrorlanmasligi uchun */
+}
+</style>
     <!-- slider Area Start-->
-    <div class="slider-area ">
+    <div class="slider-area">
         <!-- Mobile Menu -->
         <div class="single-slider slider-height2 d-flex align-items-center" style="max-height: 0px;">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>D-Max</h2>
                         </div>
                     </div>
                 </div>
@@ -103,126 +157,33 @@
     <!-- slider Area End-->
 
     <!--================Blog Area =================-->
-    <!-- <section class="blog_area section-padding">
+    <section class="blog_area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-">
                     <div class="blog_left_sidebar">
                         <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{% static 'img/en.png' %}"  alt="">
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
+                            <img src="{% static 'img/dmax.png' %}" style="max-width: 100%;" alt="">
                         </article>
 
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="assets/img/blog/single_blog_2.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="assets/img/blog/single_blog_3.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="assets/img/blog/single_blog_4.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="assets/img/blog/single_blog_5.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
     <!--================Blog Area =================-->
     <section class="blog_area section-padding">
         <div class="container">
             <div class="row">
-                <img src="{% static 'img/dmax.png' %}" style="max-width: 100%;">
+                <img src="{% static 'img/max.jpg' %}" style="max-width: 100%;">
+            </div>
+        </div>
+    </section>
+
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <img src="{% static 'img/max2.jpg' %}" style="max-width: 100%;">
             </div>
         </div>
     </section>
@@ -237,7 +198,7 @@
                 <div class="row">
                  <div class="col-xl-7 col-lg-7 col-md-7">
                      <div class="footer-copy-right">
-                         <p> &copy; Truck Service  Center | Barcha huquqlar himoyalangan. </div>
+                         <p> &copy; Truck Service  Center | {% trans "Barcha huquqlar himoyalangan."%}</div>
    
                  </div>
                   <div class="col-xl-5 col-lg-5 col-md-5">

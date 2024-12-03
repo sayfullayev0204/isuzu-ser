@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-03 17:26+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\templates\index.html:72
+msgid "Ruscha"
+msgstr "Russian"
+
+#: .\templates\index.html:85
+msgid "Inglizcha"
+msgstr "English"
+
+#: .\templates\index.html:98
+msgid "O'zbekcha"
+msgstr "Uzbek"
+
+msgid "Asosiy"
+msgstr "Main"
+
+msgid "Biz haqimizda"
+msgstr "About Us"
+
+msgid "Narxlar"
+msgstr "Prices"
+
+msgid "Ehtiyot qisimlari"
+msgstr "Spare Parts"
+
+msgid "Servis"
+msgstr "Service"
+
+msgid "D-max"
+msgstr "D-max"
+
+msgid "Bizning mahsulotlar"
+msgstr "Our Products"
+
+msgid "Barchasi"
+msgstr "All"
+
+msgid "Avtobuslar"
+msgstr "Buses"
+
+msgid "Yuk mashinalari"
+msgstr "Trucks"
+
+msgid "Maxsus texnikalar"
+msgstr "Special Equipment"
+
+msgid "Biz bilan bog'lanish"
+msgstr "Contact Us"
+
+msgid "Xabar qoldirish"
+msgstr "Leave a Message"
+
+msgid "Barcha huquqlar himoyalangan."
+msgstr "All rights reserved."
+
+msgid "Sizni, kompaniyamizning potentsial mijozi – “SamAvto” va “Uz Truck and Bus Motors” rasmiy dileri sifatida tabriklaymiz. Biz sizga sanoatning ishonchi va hurmatini qozongan ishlab chiqaruvchilarning eng yuqori sifatli mahsulotlarini olib kelishdan faxrlanamiz. Kompaniyamiz xizmatlarning to'liq spektrini, jumladan, transport vositalari va dvigatellarni sotish va texnik xizmat ko'rsatish, jumladan, maslahat, ta'mirlash va texnik xizmat ko'rsatishni taklif qiladi. Biz doimo xizmatlarimizni yaxshilash ustida ishlaymiz, shunda bizning tajribamiz faqat eng yaxshisidir. Avtomobilingiz yoki dvigatelingizni sotib olishingiz va ishlatishingizga qanday yordam berishimiz haqida ko'proq bilish uchun bugun biz bilan bog'laning."
+msgstr "We welcome you, a potential client of our company – the official dealer of “SamAvto” and “Uz Truck and Bus Motors”. We are proud to bring you the highest quality products from manufacturers that have earned the trust and respect of the industry. Our company offers a full range of services, including sales and maintenance of vehicles and engines, including consulting, repair and maintenance. We are constantly working to improve our services so that our experience is only the best. Contact us today to learn more about how we can help you buy and operate your vehicle or engine."
+
+msgid "Biz keng ko'lamli xizmatlar taqdim etamiz: -Diagnostika -Dvigatel tiklash -Vites qutisini ta'mirlash -Havoni tizimini tiklash -Shassi tiklash -Elektr ta'mirlash -Gidravlik tizimini tiklash Bizning mutaxassislarimiz yuqori sifatli tiklash va avtomobilingizni qo'llab-quvvatlashni ta'minlashga imkon beradigan malakali va tajribali mutaxassislar hisoblanadi."
+msgstr "We provide a wide range of services: -Diagnostics -Engine rebuild -Gearbox rebuild -Air system rebuild -Chassis rebuild -Electrical rebuild -Hydraulic system rebuild Our specialists are qualified and experienced professionals who can provide high-quality rebuilds and support for your vehicle."
+
+msgid "Mashina narxlari"
+msgstr "Car prices"
+
+msgid "Xabar matni"
+msgstr "Message text"  # English
+
+msgid "Ismingiz"
+msgstr "Your name"  # Englis
+
+msgid "Emailingiz"
+msgstr "Your email"  # Englis
+
+msgid "Sarlavha"
+msgstr "Subject"  # English
+
+msgid "Yuborish"
+msgstr "Send"  # English

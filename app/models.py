@@ -1,20 +1,24 @@
 from django.db import models
 from parler.models import TranslatableModel, TranslatedFields
 
+class Turi(TranslatableModel):
+    translations = TranslatedFields(
+        nomi = models.CharField(max_length=200),
+    )
+    def __str__(self) -> str:
+        return self.nomi
+    
 
 class Mahsulotlar(TranslatableModel):
-    categories = (
-        ('avtobuslar', 'avtobuslar'),
-        ('yuk_mashinalari', 'yuk_mashinalari'),
-        ('maxsus_mashinalari', 'maxsus_mashinalari'),
-    )
-    turi = models.CharField(max_length=200, choices=categories)
+    turi = models.ForeignKey(Turi, on_delete=models.CASCADE)
     translations = TranslatedFields(
         nomi = models.CharField(max_length=200),
     )
     narxi = models.IntegerField()
     rasm = models.ImageField(upload_to='images/', null=True, blank=True, verbose_name="Asosiy rasm")
 
+    def __str__(self) -> str:
+        return self.nomi
 
 class Image(models.Model):
     product = models.ForeignKey(Mahsulotlar, related_name='images', on_delete=models.CASCADE, verbose_name="Mahsulotlar")
